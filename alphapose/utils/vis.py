@@ -412,8 +412,11 @@ def vis_frame(frame, im_res, opt, vis_thres, format='coco'):
         kp_preds = human['keypoints']
         kp_scores = human['kp_score']
         if kp_num == 17:
-            kp_preds = torch.cat((kp_preds, torch.unsqueeze((kp_preds[5, :] + kp_preds[6, :]) / 2, 0)))
-            kp_scores = torch.cat((kp_scores, torch.unsqueeze((kp_scores[5, :] + kp_scores[6, :]) / 2, 0)))
+            # kp_preds = torch.cat((kp_preds, torch.unsqueeze((kp_preds[5, :] + kp_preds[6, :]) / 2, 0)))
+            # kp_scores = torch.cat((kp_scores, torch.unsqueeze((kp_scores[5, :] + kp_scores[6, :]) / 2, 0)))
+            # # NOTE Added to prevent error due to above concatenation which adds a dummy keypoint
+            # # vis_thres.append((vis_thres[5] + vis_thres[6])/2)
+            pass
         if opt.tracking:
             color = get_color_fast(int(abs(human['idx'])))
         else:
